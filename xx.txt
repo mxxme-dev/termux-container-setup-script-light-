@@ -1,0 +1,187 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+APK_URL="https://github.com/termux/termux-widget/releases/download/v0.14.0/termux-widget-app_v0.14.0+github.debug.apk"
+APK_DIR="/storage/emulated/0/Download/termux_apks"
+APK_FILE="$APK_DIR/termux-widget.apk"
+SHORTCUT_DIR="$HOME/.shortcuts"
+START_SCRIPT="$HOME/startxfce4_termux.sh"
+LAUNCHER_SCRIPT="$HOME/start.sh"
+
+mkdir -p "$APK_DIR"
+mkdir -p "$SHORTCUT_DIR"
+
+print_pattern() {
+    echo -e "\033[1;32m========================================\033[0m"
+}
+
+apk_setup() {
+    clear
+    print_pattern
+    echo "Granting overlay permission for Termux..."
+    print_pattern
+    pm grant com.termux android.permission.SYSTEM_ALERT_WINDOW 2>/dev/null
+    am start -a android.settings.action.MANAGE_OVERLAY_PERMISSION -d "package:com.termux"
+    echo "Please grant overlay permission for Termux, then press ENTER to continue."
+    read -r
+    am start -a android.intent.action.VIEW -d "file:///storage/emulated/0/Download/termux_apks" -t "resource/folder"
+    print_pattern
+    echo "Downloading termux-widget APK..."
+    print_pattern
+    wget -O "$APK_FILE" "$APK_URL"
+    clear
+    echo "Waiting 10 minutes before deleting APK..."
+    echo "Press ENTER to continue immediately."
+    read -t 600 -r || true
+    rm -f "$APK_FILE"
+    clear
+    print_pattern
+    echo "Downloading startxfce4_termux.sh script..."
+    print_pattern
+    cd ~ || exit
+    wget https://raw.githubusercontent.com/LinuxDroidMaster/Termux-Desktops/main/scripts/termux_native/startxfce4_termux.sh -O "$START_SCRIPT"
+    chmod +x "$START_SCRIPT"
+    echo "bash ~/startxfce4_termux.sh" > "$LAUNCHER_SCRIPT"
+    chmod +x "$LAUNCHER_SCRIPT"
+    echo "#!/bin/bash" > "$SHORTCUT_DIR/startxfce4_termux.sh"
+    echo "bash ~/start.sh" >> "$SHORTCUT_DIR/startxfce4_termux.sh"
+    chmod +x "$SHORTCUT_DIR/startxfce4_termux.sh"
+    clear
+    print_pattern
+    echo "Setup done. Run start.sh or use shortcut in ~/.shortcuts/"
+    print_pattern
+    sleep 3
+}
+
+install_pkg() {
+    local pkg_name=$1
+    clear
+    print_pattern
+    echo "Installing package: $pkg_name"
+    print_pattern
+    pkg install -y "$pkg_name"
+    clear
+}
+
+full_install() {
+    clear
+    cd ~ || exit
+
+    install_pkg wget
+    install_pkg curl
+    install_pkg tsu
+    install_pkg proot
+    install_pkg pulseaudio
+
+    clear
+    print_pattern
+    echo "Setting up storage access..."
+    print_pattern
+    termux-setup-storage
+    sleep 1
+
+    clear
+    print_pattern
+    echo "Changing Termux repo to main..."
+    print_pattern
+    termux-change-repo -y
+    sleep 1
+
+    clear
+    print_pattern
+    echo "Updating apt packages..."
+    print_pattern
+    apt-get update -y
+    clear
+
+    print_pattern
+    echo "Upgrading apt packages..."
+    print_pattern
+    apt-get upgrade -y
+    clear
+
+    if [ -e $PREFIX/glibc ]; then
+        rm -rf $PREFIX/glibc
+    fi
+
+    mkdir -p $PREFIX/glibc/opt/package-manager/installed
+    echo "PROJECT_ID=54240888" > $PREFIX/glibc/opt/package-manager/token
+
+    clear
+    print_pattern
+    echo "Downloading package manager for Mobox..."
+    print_pattern
+    wget -q --retry-connrefused --tries=3 "https://gitlab.com/api/v4/projects/54240888/repository/files/package-manager/raw?ref=main" -O $PREFIX/glibc/opt/package-manager/package-manager || echo "Mobox download failed"
+    chmod +x $PREFIX/glibc/opt/package-manager/package-manager
+
+    clear
+    print_pattern
+    echo "Running Mobox package sync..."
+    print_pattern
+    . $PREFIX/glibc/opt/package-manager/package-manager && sync-all && sync-package wine-9.3-vanilla-wow64
+    ln -sf $PREFIX/glibc/opt/scripts/mobox $PREFIX/bin/mobox
+    clear
+
+    print_pattern
+    echo "Installing x11-repo and related packages..."
+    print_pattern
+    install_pkg x11-repo
+    apt update -y
+    clear
+
+    install_pkg virglrenderer
+    install_pkg mesa
+    install_pkg xwayland
+    install_pkg xorg-xrandr
+    install_pkg p7zip
+    install_pkg hashdeep
+
+    install_pkg xfce4
+    install_pkg xterm
+    install_pkg vulkan-tools
+    install_pkg proot-distro
+
+    clear
+    print_pattern
+    echo "Downloading additional deb packages..."
+    print_pattern
+    wget https://github.com/mxxme-dev/termux-container-setup-script-light-/raw/refs/heads/main/xDeb.tar
+    tar -xf xDeb.tar
+    rm xDeb.tar
+    clear
+
+    print_pattern
+    echo "Installing deb packages..."
+    print_pattern
+    cd debs || exit
+    dpkg -i ./*.deb || apt --fix-broken install -y
+    cd ..
+    clear
+
+    echo "xfce4-session" > ~/.xinitrc
+    echo "export DISPLAY=:1" >> ~/.bashrc
+    echo "start-pulseaudio-x11" >> ~/.bashrc
+    echo "xfce4-session" >> ~/.bashrc
+
+    clear
+    print_pattern
+    echo "Full install complete!"
+    print_pattern
+    sleep 3
+}
+
+while true; do
+    clear
+    echo -e "\033[1;34mTermux Setup Script\033[0m"
+    echo "=============================="
+    echo "1) APK Setup (termux-widget)"
+    echo "2) Full Install (big script)"
+    echo "3) Exit"
+    echo "=============================="
+    read -rp "Choose an option: " opt
+    case $opt in
+        1) apk_setup ;;
+        2) full_install ;;
+        3) exit 0 ;;
+        *) echo "Invalid option." ; sleep 2 ;;
+    esac
+done
