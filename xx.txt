@@ -135,6 +135,7 @@ full_install() {
     install_pkg xorg-xrandr
     install_pkg p7zip
     install_pkg hashdeep
+    install_pkg md5deep
 
     install_pkg xfce4
     install_pkg xterm
