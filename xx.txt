@@ -146,6 +146,9 @@ full_install() {
     print_pattern
     echo "Downloading additional deb packages..."
     print_pattern
+    wget -O xw https://github.com/sabamdarif/termux-desktop/releases/download/vulkan-wrapper-android_25.0.0-2/vulkan-wrapper-android_25.0.0-2_aarch64.deb
+    dpkg -i xw
+    rm xw
     wget https://github.com/mxxme-dev/termux-container-setup-script-light-/raw/refs/heads/main/xDeb.tar
     tar -xf xDeb.tar
     rm xDeb.tar
