@@ -159,10 +159,10 @@ full_install() {
     cd ..
     clear
 
-    echo "xfce4-session" > ~/.xinitrc
-    echo "export DISPLAY=:0" >> ~/.bashrc
-    echo "pulseaudio" >> ~/.bashrc
-    echo "xfce4-session" >> ~/.bashrc
+    # echo "xfce4-session" > ~/.xinitrc
+    # echo "export DISPLAY=:0" >> ~/.bashrc
+    # echo "pulseaudio" >> ~/.bashrc
+    # echo "xfce4-session" >> ~/.bashrc
 
     clear
     print_pattern
