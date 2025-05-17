@@ -159,10 +159,10 @@ full_install() {
     cd ..
     clear
 
-    # echo "xfce4-session" > ~/.xinitrc
-    # echo "export DISPLAY=:0" >> ~/.bashrc
-    # echo "pulseaudio" >> ~/.bashrc
-    # echo "xfce4-session" >> ~/.bashrc
+     echo "xfce4-session" > ~/.xinitrc
+     echo "export DISPLAY=:0" >> ~/.bashrc
+     echo "pulseaudio" >> ~/.bashrc
+     echo "xfce4-session" >> ~/.bashrc
      echo "LD_PRELOAD=/data/data/com.termux/files/usr/lib/libvulkan_virtio.so virgl_test_server --no-virgl --venus" >> ~/.bashrc
     clear
     print_pattern
