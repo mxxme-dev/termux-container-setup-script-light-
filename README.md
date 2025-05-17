@@ -7,4 +7,5 @@ pkg update && pkg install curl && termux-setup-storage && wget -O xx https://raw
 ```
 
 * When opening a termux session press ctrl + c to exit "something" and fix input
+ (only if it lags)
 
