@@ -70,8 +70,6 @@ full_install() {
     install_pkg curl
     install_pkg tsu
     install_pkg proot
-    install_pkg pulseaudio
-    install_pkg termux-x11
 
     clear
     print_pattern
@@ -141,6 +139,8 @@ full_install() {
     install_pkg xterm
     install_pkg vulkan-tools
     install_pkg proot-distro
+    install_pkg pulseaudio
+    install_pkg termux-x11
 
     clear
     print_pattern
