@@ -136,6 +136,7 @@ full_install() {
     install_pkg md5deep
 
     install_pkg xfce4
+    install_pkg hangover-wine
     install_pkg xterm
     install_pkg vulkan-tools
     install_pkg proot-distro
