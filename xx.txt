@@ -160,8 +160,8 @@ full_install() {
     clear
 
     echo "xfce4-session" > ~/.xinitrc
-    echo "export DISPLAY=:1" >> ~/.bashrc
-    echo "start-pulseaudio-x11" >> ~/.bashrc
+    echo "export DISPLAY=:0" >> ~/.bashrc
+    echo "pulseaudio" >> ~/.bashrc
     echo "xfce4-session" >> ~/.bashrc
 
     clear
