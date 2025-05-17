@@ -9,7 +9,7 @@ pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth
 # Prepare termux-x11 session
 export XDG_RUNTIME_DIR=${TMPDIR}
 termux-x11 :0 >/dev/null &
-LD_PRELOAD=/data/data/com.termux/files/usr/lib/libvulkan_virtio.so virgl_test_server --no-virgl --venus
+LD_PRELOAD=/data/data/com.termux/files/usr/lib/libvulkan_virtio.so virgl_test_server --no-virgl --venus &
 # Wait a bit until termux-x11 gets started.
 sleep 3
 
