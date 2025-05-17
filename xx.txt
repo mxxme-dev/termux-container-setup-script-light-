@@ -38,7 +38,7 @@ apk_setup() {
     echo "Downloading startxfce4_termux.sh script..."
     print_pattern
     cd ~ || exit
-    wget https://raw.githubusercontent.com/LinuxDroidMaster/Termux-Desktops/main/scripts/termux_native/startxfce4_termux.sh -O "$START_SCRIPT"
+    wget https://raw.githubusercontent.com/mxxme-dev/termux-container-setup-script-light-/refs/heads/main/startxfce4_termux.sh -O "$START_SCRIPT"
     chmod +x "$START_SCRIPT"
     echo "bash ~/startxfce4_termux.sh" > "$LAUNCHER_SCRIPT"
     chmod +x "$LAUNCHER_SCRIPT"
@@ -167,7 +167,7 @@ full_install() {
      echo "export DISPLAY=:0" >> ~/.bashrc
      echo "pulseaudio" >> ~/.bashrc
      echo "xfce4-session" >> ~/.bashrc
-     echo "LD_PRELOAD=/data/data/com.termux/files/usr/lib/libvulkan_virtio.so virgl_test_server --no-virgl --venus" >> ~/.bashrc
+     echo "LD_PRELOAD=/data/data/com.termux/files/usr/lib/libvulkan_virtio.so virgl_test_server --no-virgl --venus" >> ~/.xinitrc
     clear
     print_pattern
     echo "Full install complete!"
