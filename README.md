@@ -7,10 +7,4 @@ pkg update && pkg install curl && termux-setup-storage && wget -O xx https://raw
 ```
 
 
-```
-cd ~ && wget https://raw.githubusercontent.com/LinuxDroidMaster/Termux-Desktops/main/scripts/termux_native/startxfce4_termux.sh
-```
 
-```
-bash ~/startxfce4_termux.sh
-```
