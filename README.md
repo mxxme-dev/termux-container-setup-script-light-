@@ -9,3 +9,6 @@ pkg update && pkg install wget -y && termux-setup-storage && wget -O xx https://
 * When opening a termux session press ctrl + c to exit "something" and fix input
  (only if it lags)
 
+To run anything using wine type 
+
+```hangover-wine app.exe```
