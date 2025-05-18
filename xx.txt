@@ -70,6 +70,8 @@ full_install() {
     install_pkg curl
     install_pkg tsu
     install_pkg proot
+    install_pkg x11-repo
+    install_pkg md5deep
 
     clear
     print_pattern
@@ -131,7 +133,6 @@ full_install() {
     install_pkg xorg-xrandr
     install_pkg p7zip
     install_pkg hashdeep
-    install_pkg md5deep
 
     install_pkg xfce4
     install_pkg hangover-wine
