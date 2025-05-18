@@ -166,6 +166,7 @@ full_install() {
     
     echo -e '[Desktop Entry]\nName=Wine Explorer\nExec=hangover-wine explorer\nIcon=system-file-manager\nType=Application\nTerminal=false' > ~/Desktop/wine-explorer.desktop && chmod +x ~/Desktop/wine-explorer.desktop
     echo -e '[Desktop Entry]\nName=Notepad\nExec=hangover-wine notepad.exe\nIcon=accessories-text-editor\nType=Application\nTerminal=false' > ~/Desktop/notepad.desktop && chmod +x ~/Desktop/notepad.desktop
+    ln -s ~/storage/downloads ~/.wine/dosdevices/d:
 
     # echo "xfce4-session" > ~/.xinitrc
     # echo "export DISPLAY=:0" >> ~/.bashrc
