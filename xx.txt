@@ -75,13 +75,13 @@ full_install() {
     print_pattern
     echo "Setting up storage access..."
     print_pattern
+    termux-setup-storage
     sleep 1
 
     clear
     print_pattern
     echo "Changing Termux repo to main..."
     print_pattern
-    termux-change-repo -y
     sleep 1
 
     clear
