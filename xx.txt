@@ -164,10 +164,6 @@ full_install() {
     clear
     
     
-    echo -e '[Desktop Entry]\nName=Wine Explorer\nExec=hangover-wine explorer\nIcon=system-file-manager\nType=Application\nTerminal=false' > ~/Desktop/wine-explorer.desktop && chmod +x /data/data/com.termux/files/home/Desktop/wine-explorer.desktop
-    echo -e '[Desktop Entry]\nName=Notepad\nExec=hangover-wine notepad.exe\nIcon=accessories-text-editor\nType=Application\nTerminal=false' > ~/Desktop/notepad.desktop && chmod +x /data/data/com.termux/files/home/Desktop/notepad.desktop
-    ln -s ~/storage/downloads ~/.wine/dosdevices/d:
-
     # echo "xfce4-session" > ~/.xinitrc
     # echo "export DISPLAY=:0" >> ~/.bashrc
     # echo "pulseaudio" >> ~/.bashrc
@@ -180,6 +176,18 @@ full_install() {
     sleep 3
 }
 
+set_paths() {
+    echo "Setting up Desktop paths..."
+
+    echo -e '[Desktop Entry]\nName=Wine Explorer\nExec=hangover-wine explorer\nIcon=system-file-manager\nType=Application\nTerminal=false' > ~/Desktop/wine-explorer.desktop && chmod +x /data/data/com.termux/files/home/Desktop/wine-explorer.desktop
+    echo -e '[Desktop Entry]\nName=Notepad\nExec=hangover-wine notepad.exe\nIcon=accessories-text-editor\nType=Application\nTerminal=false' > ~/Desktop/notepad.desktop && chmod +x /data/data/com.termux/files/home/Desktop/notepad.desktop
+    echo "Setting wine drive..."
+
+    ln -s ~/storage/downloads ~/.wine/dosdevices/d:
+
+    sleep 2
+}
+
 while true; do
     clear
     echo -e "\033[1;34mTermux Setup Script\033[0m"
@@ -187,12 +195,14 @@ while true; do
     echo "1) APK Setup (termux-widget)"
     echo "2) Full Install (big script)"
     echo "3) Exit"
+    echo "4) Setup Paths XFCE"
     echo "=============================="
     read -rp "Choose an option: " opt
     case $opt in
         1) apk_setup ;;
         2) full_install ;;
         3) exit 0 ;;
+        4) set_paths ;;
         *) echo "Invalid option." ; sleep 2 ;;
     esac
 done
