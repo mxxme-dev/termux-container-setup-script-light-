@@ -177,6 +177,8 @@ full_install() {
 }
 
 set_paths() {
+    export WINEPREFIX=~/hangoverprefix
+    mkdir -p "$WINEPREFIX"
     echo "Setting up Desktop paths..."
 
     echo -e '[Desktop Entry]\nName=Wine Explorer\nExec=hangover-wine explorer\nIcon=system-file-manager\nType=Application\nTerminal=false' > ~/Desktop/wine-explorer.desktop && chmod +x /data/data/com.termux/files/home/Desktop/wine-explorer.desktop
@@ -194,15 +196,15 @@ while true; do
     echo "=============================="
     echo "1) APK Setup (termux-widget)"
     echo "2) Full Install (big script)"
-    echo "3) Exit"
     echo "4) Setup Paths XFCE"
+    echo "5) Exit"
     echo "=============================="
     read -rp "Choose an option: " opt
     case $opt in
         1) apk_setup ;;
         2) full_install ;;
-        3) exit 0 ;;
         4) set_paths ;;
+        5) exit 0 ;;
         *) echo "Invalid option." ; sleep 2 ;;
     esac
 done
