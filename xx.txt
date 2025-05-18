@@ -75,7 +75,6 @@ full_install() {
     print_pattern
     echo "Setting up storage access..."
     print_pattern
-    termux-setup-storage
     sleep 1
 
     clear
@@ -164,8 +163,8 @@ full_install() {
     clear
     
     
-    echo -e '[Desktop Entry]\nName=Wine Explorer\nExec=hangover-wine explorer\nIcon=system-file-manager\nType=Application\nTerminal=false' > ~/Desktop/wine-explorer.desktop && chmod +x ~/Desktop/wine-explorer.desktop
-    echo -e '[Desktop Entry]\nName=Notepad\nExec=hangover-wine notepad.exe\nIcon=accessories-text-editor\nType=Application\nTerminal=false' > ~/Desktop/notepad.desktop && chmod +x ~/Desktop/notepad.desktop
+    echo -e '[Desktop Entry]\nName=Wine Explorer\nExec=hangover-wine explorer\nIcon=system-file-manager\nType=Application\nTerminal=false' > ~/Desktop/wine-explorer.desktop && chmod +x /data/data/com.termux/files/home/Desktop/wine-explorer.desktop
+    echo -e '[Desktop Entry]\nName=Notepad\nExec=hangover-wine notepad.exe\nIcon=accessories-text-editor\nType=Application\nTerminal=false' > ~/Desktop/notepad.desktop && chmod +x /data/data/com.termux/files/home/Desktop/notepad.desktop
     ln -s ~/storage/downloads ~/.wine/dosdevices/d:
 
     # echo "xfce4-session" > ~/.xinitrc
