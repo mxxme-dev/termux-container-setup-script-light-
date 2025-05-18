@@ -141,6 +141,7 @@ full_install() {
     install_pkg proot-distro
     install_pkg pulseaudio
     install_pkg termux-x11
+    termux-setup-storage
 
     clear
     print_pattern
@@ -161,6 +162,10 @@ full_install() {
     dpkg -i ./*.deb || apt --fix-broken install -y
     cd ..
     clear
+    
+    
+    echo -e '[Desktop Entry]\nName=Wine Explorer\nExec=hangover-wine explorer\nIcon=system-file-manager\nType=Application\nTerminal=false' > ~/Desktop/wine-explorer.desktop && chmod +x ~/Desktop/wine-explorer.desktop
+    echo -e '[Desktop Entry]\nName=Notepad\nExec=hangover-wine notepad.exe\nIcon=accessories-text-editor\nType=Application\nTerminal=false' > ~/Desktop/notepad.desktop && chmod +x ~/Desktop/notepad.desktop
 
     # echo "xfce4-session" > ~/.xinitrc
     # echo "export DISPLAY=:0" >> ~/.bashrc
