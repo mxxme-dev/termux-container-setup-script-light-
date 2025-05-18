@@ -75,7 +75,6 @@ full_install() {
     print_pattern
     echo "Setting up storage access..."
     print_pattern
-    termux-setup-storage
     sleep 1
 
     clear
