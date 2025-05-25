@@ -42,9 +42,9 @@ apk_setup() {
     chmod +x "$START_SCRIPT"
     echo "bash ~/startxfce4_termux.sh" > "$LAUNCHER_SCRIPT"
     chmod +x "$LAUNCHER_SCRIPT"
-    echo "#!/bin/bash" > "$SHORTCUT_DIR/startxfce4_termux.sh"
-    echo "bash ~/start.sh" >> "$SHORTCUT_DIR/startxfce4_termux.sh"
-    chmod +x "$SHORTCUT_DIR/startxfce4_termux.sh"
+    echo "#!/bin/bash" > "$SHORTCUT_DIR/start.sh"
+    echo "bash ~/startxfce4_termux.sh" >> "$SHORTCUT_DIR/start.sh"
+    chmod +x "$SHORTCUT_DIR/start.sh"
     clear
     print_pattern
     echo "Setup done. Run start.sh or use shortcut in ~/.shortcuts/"
