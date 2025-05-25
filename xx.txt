@@ -186,7 +186,7 @@ set_paths() {
     echo "Setting wine drive..."
 
     ln -s ~/storage/downloads ~/.wine/dosdevices/d:
-
+    alias run='hangover-wine'
     sleep 2
 }
 
