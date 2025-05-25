@@ -14,7 +14,7 @@ To run anything using wine type
 ```hangover-wine app.exe```
 
 To setup the wine explorer for newbies
-you neer to open the XFCE4 desktop first
+you need to open the XFCE4 desktop first
 
 then open the terminal
 and type
