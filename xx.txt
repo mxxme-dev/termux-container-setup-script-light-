@@ -136,6 +136,7 @@ full_install() {
 
     install_pkg xfce4
     install_pkg hangover-wine
+    alias run='hangover-wine'
     install_pkg xterm
     install_pkg vulkan-tools
     install_pkg proot-distro
@@ -177,6 +178,7 @@ full_install() {
 }
 
 set_paths() {
+    alias run='hangover-wine'
     export WINEPREFIX=~/hangoverprefix
     mkdir -p "$WINEPREFIX"
     echo "Setting up Desktop paths..."
@@ -186,7 +188,6 @@ set_paths() {
     echo "Setting wine drive..."
 
     ln -s ~/storage/downloads ~/.wine/dosdevices/d:
-    alias run='hangover-wine'
     sleep 2
 }
 
